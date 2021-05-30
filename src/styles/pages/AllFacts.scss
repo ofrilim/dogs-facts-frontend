@@ -1,0 +1,60 @@
+.All-Facts {
+  img {
+    position: absolute;
+    width: 12vw;
+    left: 7.5vw;
+    top: 15vh;
+    background-color: $white;
+    border-radius: 50%;
+  }
+  .shake {
+    animation: shake 1.5s;
+  }
+  h3 {
+    color: $dark;
+  }
+  button {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid $dark;
+    background-color: $dark;
+    border-radius: 2px;
+    &:hover {
+      background-color: $white;
+      color: $dark;
+    }
+  }
+}
+
+@keyframes shake {
+  0% { transform: translate(10px, 5px) rotate(0deg); }
+  10% { transform: translate(-15px, -13px) rotate(-1deg); }
+  20% { transform: translate(-7px, 2px) rotate(1deg); }
+  30% { transform: translate(16px, 14px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-7px, 5px) rotate(-1deg); }
+  60% { transform: translate(6px, -5px) rotate(0deg); }
+  70% { transform: translate(-2px, -13px) rotate(-1deg); }
+  80% { transform: translate(-7px, 2px) rotate(1deg); }
+  90% { transform: translate(0px, 10px) rotate(0deg); }
+  100% { transform: translate(-10px, -2px) rotate(-1deg); }
+}
+
+@media screen and (max-width: 800px) {
+  .All-Facts {
+    img {
+      left: 2vw;
+      top: 12vh;
+      // width: 10rem;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .All-Facts {
+    img {
+      display: none;
+    }
+  }
+}
+

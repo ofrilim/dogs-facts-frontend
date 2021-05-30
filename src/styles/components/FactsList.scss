@@ -1,0 +1,12 @@
+.Facts-List {
+  padding: 1.5rem;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 500px) {
+  .Facts-List {
+    grid-template-columns: 1fr;
+  }
+}

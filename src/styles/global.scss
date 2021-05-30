@@ -1,0 +1,16 @@
+// // base
+@import 'basic/reset';
+@import 'basic/variables.scss';
+@import 'basic/base';
+@import 'basic/helpers';
+
+
+// // components
+@import 'components/NavBar.scss';
+@import 'components/FactsList.scss';
+@import 'components/Fact.scss';
+
+// // pages
+@import 'pages/MyFacts.scss';
+@import 'pages/AllFacts.scss';
+

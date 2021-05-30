@@ -1,0 +1,12 @@
+.Nav-Bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  background-color: $white;
+  color: $dark;
+  box-shadow: 1px 2px 15px 0px rgba(0,0,0,0.75);
+  a {
+    padding: 1rem 2rem;
+  }
+}
