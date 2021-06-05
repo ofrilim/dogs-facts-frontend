@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import { getRandomAngle, notify } from '../utilsService';
 import FactsList from '../components/FactsList';
 import dogImage from '../images/no-facts-dog.png';
@@ -10,11 +10,14 @@ export default class MyFacts extends Component {
   constructor() {
     super();
     this.state = {
-      myFacts: []
+      myFacts: [],
+      isLoading: false
     }
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
+
     // get the user's personal facts from server
     axios.get('http://localhost:5000/myfacts', { withCredentials: true })
       .then(res => {
@@ -23,7 +26,8 @@ export default class MyFacts extends Component {
             txt: fact,
             isSaved: true,
             angle: getRandomAngle()
-          }))
+          })),
+          isLoading: false
         })
       })
   }
@@ -41,16 +45,16 @@ export default class MyFacts extends Component {
   }
 
   render() {
-    let { myFacts } = this.state;
+    let { myFacts, isLoading } = this.state;
     return (
       <div className="My-Facts">
         <h1 className="bold capitalize center">my facts</h1>
         <ToastContainer autoClose={2500} limit={2} />
-        {myFacts.length > 0 ? <FactsList facts={myFacts} removeFact={this.removeFact} />
-                            : <div className="no-facts">
-                                <img src={dogImage} alt={'dog'}/>
-                                <h3>No saved facts</h3>
-                              </div>}
+        {myFacts.length > 0 ? <FactsList facts={myFacts} removeFact={this.removeFact} isLoading={isLoading} />
+          : <div className="no-facts">
+            <img src={dogImage} alt={'dog'} />
+            <h3>No saved facts</h3>
+          </div>}
       </div>
     )
   }

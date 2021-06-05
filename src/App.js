@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { getRandomAngle, notify } from './utilsService';
+
 import AllFacts from './pages/AllFacts';
 import MyFacts from './pages/MyFacts';
 import NavBar from './components/NavBar';
@@ -15,6 +16,7 @@ export default class App extends Component {
     this.state = {
       allFacts: [],
       isShaking: false,
+      isLoading: false,
     }
   }
 
@@ -23,9 +25,10 @@ export default class App extends Component {
   }
 
   getDataFromServer = () => {
-    this.setState((prevState) => ({
-      isShaking: false
-    }))
+    this.setState({
+      isShaking: false,
+      isLoading: true
+    })
 
     // getting facts from server and transform them into an objects
     axios.get('http://localhost:5000/', { withCredentials: true })
@@ -36,7 +39,8 @@ export default class App extends Component {
             isSaved: false,
             angle: getRandomAngle()
           })), ...prevState.allFacts],
-          isShaking: true
+          isShaking: true,
+          isLoading: false
         }))
       })
 
@@ -52,18 +56,20 @@ export default class App extends Component {
   }
 
   render() {
+    const { allFacts, isShaking, isLoading } = this.state;
     return (
       <div className="App">
         <NavBar />
         <ToastContainer autoClose={2500} limit={2} />
         <Switch>
           <Route exact path="/" render={() => <AllFacts
-            facts={this.state.allFacts}
+            facts={allFacts}
             saveFact={this.saveFact}
             getMoreFacts={this.getDataFromServer}
-            isShaking={this.state.isShaking}
+            isShaking={isShaking}
+            isLoading={isLoading}
           />} />
-          <Route exact path="/myfacts" render={() => <MyFacts />} />
+          <Route exact path="/myfacts" render={() => <MyFacts isLoading={isLoading} />} />
         </Switch>
       </div>
     )
